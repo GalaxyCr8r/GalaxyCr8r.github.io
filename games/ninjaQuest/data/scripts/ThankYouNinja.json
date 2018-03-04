@@ -1,0 +1,74 @@
+/*
+	player_talk : [ line:$ .. 5]
+	option_select : [ prompt:$, option:$ .. 4]
+	change_thread : [ thread:$ ]
+	
+	trigger_check : [trigger:$, check:$, thread:$]
+	trigger_set: [ trigger:$, value:$ = "" ]
+	
+	add_object : [ id$, x%, y%, image$ ]
+	scale_object : [ id$, sx#, sy# ]
+	place_object : [ id$, x%, y% ]
+	animation_change : [ type:$%, animVar:$%=0, animSpeed:$%=250 ]
+*/
+
+{
+	"init":[
+		["add_object",			"ninja",24,50,"ninja"],
+		["add_object",			"elder",136,44,"magi"],
+		["scale_object",		"elder",-1.0,1.0]
+	],
+	"main":[
+		["trigger_check","hint","0","hint2"],
+		["trigger_check","hint","1","hint3"],
+		["change_thread","hint1"]
+	],
+	"hint1":[
+		["animation_change",	"elder","1","1"],
+		["player_talk",
+			"What? Want some pointers?",
+			"Only the weakest monsters",
+			"have made it this far,",
+			"train on them, but make",
+			"your way to the FOREST."
+		],
+		["animation_change",	"elder","0"],
+		["trigger_set","hint","0"],
+		["change_thread","close"]
+	],
+	"hint2":[
+		["animation_change",	"elder","1","1"],
+		["player_talk",
+			"What? Want some pointers?",
+			"Make sure you go out of",
+			"your way to look for",
+			"hidden passages, it might",
+			"lead to somewhere special!"
+		],
+		["animation_change",	"elder","0"],
+		["trigger_set","hint","1"],
+		["change_thread","close"]
+	],
+	"hint3":[
+		["animation_change",	"elder","1","1"],
+		["player_talk",
+			"What? Want some pointers?",
+			" ",
+			" ",
+			" ",
+			"NOPE!"
+		],
+		["animation_change",	"elder","0"],
+		["trigger_set","hint","2"],
+		["change_thread","close"]
+	],
+	"close":[
+		["animation_change",	"elder","1","1"],
+		["player_talk",			
+			"Thanks again NINJA,",
+			"I knew I could count",
+			"on you!"
+		],
+		["animation_change",	"elder","0"]
+	]
+}

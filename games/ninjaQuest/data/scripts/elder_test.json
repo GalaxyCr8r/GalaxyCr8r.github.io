@@ -1,0 +1,42 @@
+/*
+	player_talk : [ line:$ .. 5]
+	other_talk : not used
+	option_select : [ prompt:$, option:$ .. 4]
+	animation_change : [ type:$%, animVar:$%=0, animSpeed:$%=250 ]
+	change_thread : [ thread:$ ]
+	trigger_check : [trigger:$, check:$, thread:$]
+	trigger_set: [ trigger:$, value:$ = "" ]
+*/
+
+{
+	"main":[
+		{"animation_change":["elder","1","1"]},
+		{"player_talk":["Welcome the test of","the full capabilities","of this scripting system!"]},
+		{"animation_change":["elder","0"]},
+		{"option_select":["Play fluffly bunny?","yes`right","NO!`wrong","maybe..`wrong"]}
+	],
+	"right":[
+		{"animation_change":["elder","1","1"]},
+		{"player_talk":["Aw yisss!"]},
+		{"animation_change":["elder","0"]},
+		{"trigger_set":["hasarcher","yes"]},
+		{"change_thread":["check"]}
+	],
+	"wrong":[
+		{"animation_change":["elder","1","1"]},
+		{"player_talk":["Say whaaaaaaaaa","aaat!"]},
+		{"animation_change":["elder","0"]},
+		{"trigger_set":["hasarcher","nope"]},
+		{"change_thread":["check"]}
+	],
+	"phoenix":[
+		{"animation_change":["elder","1","1"]},
+		{"player_talk":["Well anyways..."]}
+	],
+	"check":[
+		{"trigger_check":["hasarcher","yes","phoenix"]},
+		{"trigger_check":["hasarcher","!any","right"]},
+		{"trigger_check":["hasarcher","!empty","wrong"]},
+		{"player_talk":["You shouldn't get this far..."]}
+	]
+}
